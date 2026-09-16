@@ -39,10 +39,25 @@
   <h2>Privacy</h2>
   <p>See the <a href="../privacy/">privacy policy</a>. There are no accounts and nothing to delete on our side.</p>
 
-  <div dir="rtl" lang="he">
+  <!-- Each visitor sees only their own browser language's section (plus English). -->
+  <div class="local" dir="rtl" lang="ar" hidden>
+    <h2>الدعم بالعربية</h2>
+    <p>أسئلة أو مشاكل أو عملية شراء لم تظهر؟ راسلنا على <a href="mailto:alisarsur1306@gmail.com">alisarsur1306@gmail.com</a> واذكر طراز هاتفك وما حدث. إذا لم تظهر عملية شراء، افتح المتجر داخل اللعبة واضغط «استعادة المشتريات».</p>
+  </div>
+  <div class="local" dir="rtl" lang="he" hidden>
     <h2>תמיכה בעברית</h2>
     <p>שאלות, תקלות או רכישה שלא הופיעה? כתבו אל <a href="mailto:alisarsur1306@gmail.com">alisarsur1306@gmail.com</a> וציינו את דגם הטלפון ומה קרה. אם רכישה לא מופיעה, פתחו את החנות במשחק ולחצו על שחזור רכישות.</p>
   </div>
+  <script>
+    (function () {
+      var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map(function (l) { return String(l).toLowerCase(); });
+      document.querySelectorAll('.local').forEach(function (el) {
+        var code = el.getAttribute('lang');
+        var match = langs.some(function (l) { return l.indexOf(code) === 0 || (code === 'he' && l.indexOf('iw') === 0); });
+        if (match) el.hidden = false;
+      });
+    })();
+  </script>
 
   <footer>Don't Press Me · <a href="../privacy/">Privacy Policy</a></footer>
 </main>
